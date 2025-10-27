@@ -1,17 +1,11 @@
-# Sử dụng image Node.js chính thức
-FROM node:18
+# Dùng image PHP chính thức
+FROM php:8.2-apache
 
-# Đặt thư mục làm việc
-WORKDIR /app
+# Copy toàn bộ mã nguồn vào thư mục web
+COPY . /var/www/html/
 
-# Sao chép toàn bộ file vào container
-COPY . .
+# Mở port 80
+EXPOSE 80
 
-# Cài đặt dependencies
-RUN npm install
-
-# Mở cổng
-EXPOSE 3000
-
-# Chạy ứng dụng
-CMD ["npm", "start"]
+# Bật mod_rewrite nếu cần
+RUN a2enmod rewrite
